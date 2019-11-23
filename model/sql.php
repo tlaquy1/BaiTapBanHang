@@ -94,6 +94,46 @@
         //echo "<h4>kết nối thành công<h4>";
         return $sach;
     }
+    static function getListLoaiFromDB($MaLoai){
+      
+        $link = connect();
+        $sql = "SELECT * FROM sach WHERE sach.MaLoai='$MaLoai'";
+        
+        $result =  $link->query($sql);
+        $list = array();
+        
+        if($result->num_rows > 0){
+            while ($row = $result->fetch_assoc()) {//biên nó thành 1 mảng kết hợp
+                //$thongtin = new ThongTin($row["ID"],$row["Ten"],$row["Email"],$row["SDT"]);
+                $sach = new Sach($row["MaSach"], $row["TenSach"], $row["SoLuong"], $row["Gia"], 
+                $row["MaLoai"], $row["SoTap"], $row["Anh"], $row["NgayNhap"], $row["TacGia"],$row["TomTat"]);
+                
+                array_push($list,$sach);
+            }
+        }
+        //b3 : đóng kết nối
+        $link->close();
+        //echo "<h4>kết nối thành công<h4>";
+        return $list;
+    }
+    static function getSearch($search = null){
+        $link = connect();
+        
+        //$sql="SELECT * FROM Contact where ID = '%$search%' or Name like N'%$search%' or Phone like '%$search%' or Email like '%$search%' ";
+        $sql="SELECT * FROM `sach` WHERE `TenSach` LIKE N'%$search%' OR `TacGia` LIKE N'%$search%' OR`TomTat` LIKE N'%$search%'";
+        $result =  $link->query($sql);
+        $list = array();
+        
+        if($result->num_rows > 0){
+            while ($row = $result->fetch_assoc()) {//biên nó thành 1 mảng kết hợp
+                $sach = new Sach($row["MaSach"], $row["TenSach"], $row["SoLuong"], $row["Gia"], 
+                $row["MaLoai"], $row["SoTap"], $row["Anh"], $row["NgayNhap"], $row["TacGia"],$row["TomTat"]);
+                array_push($list,$sach);
+            }
+        }
+        $link->close();
+        return $list;
+    }   
 }
 class Loai
 {
@@ -139,6 +179,19 @@ class Loai
         $link->close();
         //echo "<h4>kết nối thành công<h4>";
         return $list;
+    }
+    static function countSachOfLoai($MaLoai=null){
+        $link=connect();
+        $sql="SELECT COUNT(sach.MaSach) AS DEM FROM `sach` WHERE `MaLoai`='$MaLoai'";
+        $result =  $link->query($sql);
+        //if($result->num_rows > 0){
+             while ($row = $result->fetch_assoc()) {//biên nó thành 1 mảng kết hợp
+                $count = $row["DEM"];
+               
+            }
+        //}
+        $link->close();
+        return $count;
     }
 }
 class GioHang{
@@ -189,10 +242,12 @@ class GioHang{
             //b3 : đóng kết nối
             $link->close();
         }
-        static function editGioHangDB($MaSach,$SoLuong)
+        static function editGioHangDB($MaSach,$SoLuong,$Gia)
         {
             $link = connect();
-            $sql="UPDATE `giohang` SET SoLuong='$SoLuong' WHERE MaSach='$MaSach'";
+            $ThanhTien=$Gia*$SoLuong;
+            $sql="UPDATE `giohang` SET SoLuong='$SoLuong',`ThanhTien`='$ThanhTien' WHERE MaSach='$MaSach'";
+            
        
             if (mysqli_query($link, $sql)) {
                 echo "<script type='text/javascript'>alert('Thêm Thành công');</script>";

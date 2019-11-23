@@ -12,7 +12,7 @@ if (isset($_REQUEST["action"])) {
         $check=false;
         foreach ($list as $key => $value) {
            if($masach==$value->MaSach){
-             GioHang::editGioHangDB($masach,$value->SoLuong+1);
+                           GioHang::editGioHangDB($masach,$soluong,$gia);
            $check=true;
          
            }
@@ -37,7 +37,9 @@ if (isset($_REQUEST["btnEdit"])) {
 
     $masach=$_REQUEST["btnEdit"];
     $soluong=$_REQUEST["txtsoluong$masach"];
-    GioHang::editGioHangDB($masach,$soluong);
+    $sach=Sach::getChiTiet($masach);
+    $gia=$sach->Gia;
+    GioHang::editGioHangDB($masach,$soluong,$gia);
  
 }
 

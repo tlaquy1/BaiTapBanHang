@@ -82,7 +82,7 @@ $dem = 0;
                           <div>
                             <td>
                               
-                                <a href="xuly.php?action=them&ms=<?php echo $value->MaSach?>&gia=<?php echo $value->Gia?>">  <img src="<?php echo $value->Anh ?> "> </a>
+                                <a href="xuly.php?action=them&ms=<?php echo $value->MaSach?>&gia=<?php echo $value->Gia?>">  <img src="<?php echo $value->Anh ?> " style="height: 264px;"></a>
                                 <br>
                                 <div class="row">
                                     <div class="col-lg-6">
