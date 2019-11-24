@@ -20,7 +20,7 @@ foreach ($lsGioHangFromDB as $key => $value) {
 <!-- <b>TRang 2222222222222222222</b> -->
 <div class="content-wrapper">
 <form action="newxuly.php" method="post">
-    <table class="table" border='1'>
+    <table class="table" border='1' style="overflow: auto;">
         <thead class="thead-dark" style="background: black;
 	    color: white;">
             <tr>
@@ -46,20 +46,20 @@ foreach ($lsGioHangFromDB as $key => $value) {
                 ?>
 
                 <tr class="table-info">
-                    <td align="center"> <input type='checkbox' name='txtcheckbox[]' value="<?php echo $value->MaSach ?>"></td>
-                    <td> <b style="    font-size: 30px;"> <?php echo $sach->TenSach ?> </b></td>
-                    <td><img src="<?php echo $sach->Anh ?> " alt="" style="    width: 60px;height: 80px;"></td>
-                    <td><?php echo $sach->TacGia ?> </td>
-                    <td style="text-align: center;">
+                    <td align="center" style="vertical-align: middle;"> <input type='checkbox' name='txtcheckbox[]' value="<?php echo $value->MaSach ?>"></td>
+                    <td style="vertical-align: middle;"> <b style="    font-size: 30px;"> <?php echo $sach->TenSach ?> </b></td>
+                    <td style="vertical-align: middle;"><img src="<?php echo $sach->Anh ?> " alt="" style="    width: 60px;height: 80px;"></td>
+                    <td style="vertical-align: middle;font-size: 25px;"><?php echo $sach->TacGia ?> </td>
+                    <td style="text-align: center;vertical-align: middle;">
                         <input type="number" value="<?php echo $value->SoLuong ?>" name="txtsoluong<?php echo $value->MaSach ?>">
                         <button type="submit" value="<?php echo $value->MaSach ?>" name="btnEdit">Sua</button>
                     </td>
-                    <td><?php echo $value->Gia ?></td>
-                    <td>
+                    <td style="vertical-align: middle;"<?php echo $value->Gia ?></td>
+                    <td style="vertical-align: middle;">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg<?php echo $value->MaSach ?>"
                          value="<?php echo $value->MaSach ?>" name="btnXem">Xem chi tiết</button>
                     </td>
-                    <td><?php echo $value->ThanhTien ?> </td>
+                    <td style="vertical-align: middle;font-size: 25px;"><?php echo $value->ThanhTien ?> </td>
 
                 </tr>
 
@@ -70,7 +70,8 @@ foreach ($lsGioHangFromDB as $key => $value) {
             ?>
         </tbody>
     </table>
-    <button class="btn btn-danger" type="submit" value="Xoa" name="btnXoa" style="    margin-left: 500px;">Xóa</button>
+    <button class="btn btn-danger" type="submit" value="Xoa" name="btnXoa" style="    margin-left: 500px;    height: 50px;
+    width: 80px;">Xóa</button>
     <button class="btn btn-outline-danger"> <a href="newxuly.php?action=deleteAll"> XoaHet</a></button>
     <!-- <input type="submit" value="Xoa" name="btnXoa"> -->
     </div>
@@ -78,8 +79,8 @@ foreach ($lsGioHangFromDB as $key => $value) {
 
 
    
-<div align="right">
-    <h2><b><?php echo $tong ?> </b> </h2>
+<div align="right" style="margin-top: -205px;">
+    <h1><b><?php echo $tong ?> </b> </h1>
 </div>
 
 
